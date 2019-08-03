@@ -1,16 +1,16 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-class HomeScreen extends React.Component {
+class ChatScreen extends React.Component {
   componentDidMount() {}
 
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
+        <Text>Chat Screen</Text>
       </View>
     );
   }
 }
 
-export default HomeScreen;
+export default ChatScreen;
