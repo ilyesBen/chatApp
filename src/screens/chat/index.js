@@ -14,16 +14,14 @@ class ChatScreen extends React.Component {
   }
 
   render() {
-    const { messages } = this.props;
+    const { messages, navigation } = this.props;
+    const user = navigation.getParam('user');
+
     return (
       <GiftedChat
         messages={messages}
         onSend={newMessages => this.onSend(newMessages)}
-        user={{
-          _id: 1,
-          name: 'Ilyes Ben',
-          avatar: 'https://img.bfmtv.com/c/1000/600/609ad/e9fd5f640762d13cef0fea8dd37.jpeg',
-        }}
+        user={user}
       />
     );
   }
@@ -32,6 +30,7 @@ class ChatScreen extends React.Component {
 ChatScreen.propTypes = {
   messages: PropTypes.arrayOf(PropTypes.object).isRequired,
   onSendMessage: PropTypes.func.isRequired,
+  navigation: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 const mapStateToProps = state => ({

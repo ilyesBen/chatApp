@@ -1,11 +1,22 @@
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import LoginScreen from 'screens/login';
 import ChatScreen from 'screens/chat';
-import UsersScreen from 'screens/users';
+import UsersListScreen from 'screens/users';
+import ConvsListScreen from 'screens/conversations';
+
+const ChatStackNavigator = createStackNavigator(
+  {
+    ConvsList: ConvsListScreen,
+    Chat: ChatScreen,
+  },
+  {
+    headerMode: 'none',
+  }
+);
 
 const HomeTabNavigator = createBottomTabNavigator({
-  Chat: ChatScreen,
-  Users: UsersScreen,
+  Chat: ChatStackNavigator,
+  Users: UsersListScreen,
 });
 
 const AppNavigator = createStackNavigator(
