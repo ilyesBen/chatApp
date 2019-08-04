@@ -1,8 +1,8 @@
+import { creatActionTypes } from 'utils/actions';
 import { Name } from './name';
 
-const appendName = actionType => `${Name}/${actionType}`;
+const types = ['SEND_MESSAGE', 'DUMMY_ACTION'];
 
-const SEND_MESSAGE = appendName('SEND_MESSAGE');
-const DUMMY_ACTION = appendName('DUMMY_ACTION');
+const actionTypes = creatActionTypes(Name, types);
 
-export default { SEND_MESSAGE, DUMMY_ACTION };
+export default actionTypes;
