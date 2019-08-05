@@ -30,7 +30,7 @@ class ConvsList extends React.Component {
     return (
       <TouchableOpacity onPress={() => navigation.navigate('Chat', { user: item })}>
         <View style={styles.itemContainer}>
-          <Image style={styles.avatar} source={{ uri: item.avatar }} />
+          <Image style={styles.avatar} source={{ uri: item.avatar }} resizeMode="cover" />
           <Text style={styles.text}>{item.name}</Text>
         </View>
       </TouchableOpacity>

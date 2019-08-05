@@ -6,11 +6,12 @@ import ConvsListScreen from 'screens/conversations';
 
 const ChatStackNavigator = createStackNavigator(
   {
-    ConvsList: ConvsListScreen,
+    ConvsList: { screen: ConvsListScreen },
     Chat: ChatScreen,
   },
   {
     headerMode: 'none',
+    navigationOptions: ({ navigation }) => navigation.state.index > 0 && { tabBarVisible: false },
   }
 );
 
