@@ -17,23 +17,20 @@ export const selectMessages = createSelector(
     const { users, messages } = state;
     return messages.reduce((acc, message) => {
       const { authorId, receiverId } = message;
-      if (
-        (authorId === userId && receiverId === currentUser.id) ||
+      return (authorId === userId && receiverId === currentUser.id) ||
         (authorId === currentUser.id && receiverId === userId)
-      ) {
-        return [
-          ...acc,
-          {
-            ...message,
-            user: {
-              _id: users[authorId].id,
-              name: users[authorId].name,
-              avatar: users[authorId].avatar,
+        ? [
+            ...acc,
+            {
+              ...message,
+              user: {
+                _id: users[authorId].id,
+                name: users[authorId].name,
+                avatar: users[authorId].avatar,
+              },
             },
-          },
-        ];
-      }
-      return [...acc];
+          ]
+        : acc;
     }, []);
   }
 );
