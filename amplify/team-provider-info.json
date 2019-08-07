@@ -1,0 +1,14 @@
+{
+    "chatapp": {
+        "awscloudformation": {
+            "AuthRoleName": "chatapp-chatapp-20190805225303-authRole",
+            "UnauthRoleArn": "arn:aws:iam::763781207264:role/chatapp-chatapp-20190805225303-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::763781207264:role/chatapp-chatapp-20190805225303-authRole",
+            "Region": "eu-west-2",
+            "DeploymentBucketName": "chatapp-chatapp-20190805225303-deployment",
+            "UnauthRoleName": "chatapp-chatapp-20190805225303-unauthRole",
+            "StackName": "chatapp-chatapp-20190805225303",
+            "StackId": "arn:aws:cloudformation:eu-west-2:763781207264:stack/chatapp-chatapp-20190805225303/66c06640-b7cb-11e9-b88b-069ff3a6dc30"
+        }
+    }
+}

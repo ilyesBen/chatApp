@@ -1,0 +1,18 @@
+type User @model {
+  id: ID!
+  name: String!
+  avatar: String
+}
+
+type Message @model {
+  id: ID!
+  text: String!
+  authorId: ID!
+  receiverId: ID!
+  createdAt: AWSDate
+}
+
+type Subscription {
+  onCreateMessageByAuthorId(authorId: ID!): Message
+    @aws_subscribe(mutations: ["createMessage"])
+}

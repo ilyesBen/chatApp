@@ -9,6 +9,8 @@ module.exports = {
           screens: './src/screens',
           store: './src/store',
           modules: './src/modules',
+          graphqlApi: './src/graphql',
+          api: './src/api',
         },
       },
     ],

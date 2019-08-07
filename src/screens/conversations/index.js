@@ -2,13 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
-import { selectors } from 'modules/Chat';
+import { selectors, actions } from 'modules/Chat';
 import { ConvsList } from './components';
 
 const { selectUsers } = selectors;
+const { getUsers } = actions;
 
 class ConvsListScreen extends React.Component {
-  componentDidMount() {}
+  componentDidMount() {
+    const { onGetUsers } = this.props;
+    onGetUsers();
+  }
 
   render() {
     const { users, navigation } = this.props;
@@ -22,6 +26,7 @@ class ConvsListScreen extends React.Component {
 
 ConvsListScreen.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onGetUsers: PropTypes.func.isRequired,
   navigation: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
@@ -29,4 +34,11 @@ const mapStateToProps = state => ({
   users: selectUsers(state),
 });
 
-export default connect(mapStateToProps)(ConvsListScreen);
+const mapDispatchToProps = dispatch => ({
+  onGetUsers: () => dispatch(getUsers()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ConvsListScreen);

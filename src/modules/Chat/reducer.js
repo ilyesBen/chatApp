@@ -35,13 +35,15 @@ const dummyUsers = {
 
 const initialState = {
   messages: dummyMessages,
-  users: dummyUsers,
+  users: {},
 };
 
 const chatReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case actionTypes.SEND_MESSAGE:
       return { ...state, messages: [action.payload.message, ...state.messages] };
+    case actionTypes.SET_USERS:
+      return { ...state, users: { ...state.users, ...action.payload.users } };
     default:
       return state;
   }
