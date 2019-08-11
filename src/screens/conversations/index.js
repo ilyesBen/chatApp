@@ -6,12 +6,13 @@ import { selectors, actions } from 'modules/Chat';
 import { ConvsList } from './components';
 
 const { selectUsers } = selectors;
-const { getUsers } = actions;
+const { getUsers, getAllMessages } = actions;
 
 class ConvsListScreen extends React.Component {
   componentDidMount() {
-    const { onGetUsers } = this.props;
+    const { onGetUsers, onGetMessages } = this.props;
     onGetUsers();
+    onGetMessages();
   }
 
   render() {
@@ -27,6 +28,7 @@ class ConvsListScreen extends React.Component {
 ConvsListScreen.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   onGetUsers: PropTypes.func.isRequired,
+  onGetMessages: PropTypes.func.isRequired,
   navigation: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
@@ -36,6 +38,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onGetUsers: () => dispatch(getUsers()),
+  onGetMessages: () => dispatch(getAllMessages()),
 });
 
 export default connect(

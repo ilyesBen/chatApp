@@ -9,7 +9,7 @@ type Message @model {
   text: String!
   authorId: ID!
   receiverId: ID!
-  createdAt: AWSDate
+  createdAt: AWSDateTime!
 }
 
 type Subscription {

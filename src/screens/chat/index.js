@@ -10,7 +10,7 @@ const { selectMessages } = selectors;
 
 // test DATA. To be removed
 const currentUser = {
-  _id: 99,
+  _id: '99',
   name: 'Ana Houwa',
   avatar:
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuGqKkt_LRV7co8maLFEvlOH-WzjZriCr6IVqnB4LFTtzvS9Om',
@@ -23,15 +23,17 @@ class ChatScreen extends React.Component {
     const { messages, navigation, onSendMessage } = this.props;
     const receiverId = navigation.getParam('user').id;
 
+    console.log('messages ', messages);
+
     return (
-      <View flex={1}>
+      <View flex>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text>Back</Text>
         </TouchableOpacity>
         <GiftedChat
           messages={messages}
           onSend={newMessages => onSendMessage(newMessages[0], receiverId)}
-          user={currentUser}
+          user={{ _id: '99' }}
         />
       </View>
     );

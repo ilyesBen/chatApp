@@ -13,15 +13,17 @@ const createNewUser = async () => {
     avatar:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuGqKkt_LRV7co8maLFEvlOH-WzjZriCr6IVqnB4LFTtzvS9Om',
   };
+
   await API.graphql(graphqlOperation(createUser, { input: user }));
 };
 
 const createNewMessage = async () => {
   const message = {
-    id: '2',
+    id: '8309128302103',
     text: 'Wech ana houwa authordId',
-    authorId: '7',
-    receiverId: '9',
+    authorId: '4',
+    receiverId: '99',
+    createdAt: new Date(),
   };
 
   const responseMessage = await API.graphql(graphqlOperation(createMessage, { input: message }));

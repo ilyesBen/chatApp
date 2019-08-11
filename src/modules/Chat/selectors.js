@@ -1,9 +1,10 @@
 import { createSelector } from 'reselect';
+import { sortByDate } from 'utils/arrays';
 
 const chatSate = state => state.Chat;
 
 const currentUser = {
-  id: 99,
+  id: '99',
 };
 
 export const selectMessages = createSelector(
@@ -15,14 +16,16 @@ export const selectMessages = createSelector(
   ],
   (state, { userId }) => {
     const { users, messages } = state;
-    return messages.reduce((acc, message) => {
+    const messagesToDisplay = messages.reduce((acc, message) => {
       const { authorId, receiverId } = message;
+      const { id, ...messageRest } = message;
       return (authorId === userId && receiverId === currentUser.id) ||
         (authorId === currentUser.id && receiverId === userId)
         ? [
             ...acc,
             {
-              ...message,
+              _id: id,
+              ...messageRest,
               user: {
                 _id: users[authorId].id,
                 name: users[authorId].name,
@@ -32,6 +35,8 @@ export const selectMessages = createSelector(
           ]
         : acc;
     }, []);
+    console.log('sortByDate(messagesToDisplay)', sortByDate(messagesToDisplay));
+    return sortByDate(messagesToDisplay);
   }
 );
 
