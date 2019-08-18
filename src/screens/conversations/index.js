@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
 import { selectors, actions } from 'modules/Chat';
+import { Header } from 'components';
 import { ConvsList } from './components';
 
 const { selectUsers, selectUsersWithLastMessage, selectMessagesLoading } = selectors;
@@ -20,6 +21,7 @@ class ConvsListScreen extends React.Component {
 
     return (
       <View flex>
+        <Header />
         <ConvsList users={usersWithLastMessage} navigation={navigation} />
       </View>
     );

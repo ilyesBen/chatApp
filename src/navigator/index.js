@@ -9,10 +9,15 @@ const HomeTabNavigator = createBottomTabNavigator({
   Users: UsersListScreen,
 });
 
-const HomeStackNavigator = createStackNavigator({
-  ChatUserTab: HomeTabNavigator,
-  Chat: ChatScreen,
-});
+const HomeStackNavigator = createStackNavigator(
+  {
+    ChatUserTab: HomeTabNavigator,
+    Chat: ChatScreen,
+  },
+  {
+    headerMode: 'none',
+  }
+);
 
 const AppNavigator = createStackNavigator(
   {
