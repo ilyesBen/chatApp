@@ -13,7 +13,7 @@ export const getMessages = async currentUserId => {
   const response = await API.graphql(
     graphqlOperation(queries.listMessages, {
       filter: { or: [{ authorId: { eq: currentUserId } }, { receiverId: { eq: currentUserId } }] },
-      limit: 25,
+      limit: 100,
     })
   );
   return response.data.listMessages.items;

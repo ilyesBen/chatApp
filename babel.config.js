@@ -11,6 +11,7 @@ module.exports = {
           modules: './src/modules',
           graphqlApi: './src/graphql',
           api: './src/api',
+          constants: './src/constants',
         },
       },
     ],

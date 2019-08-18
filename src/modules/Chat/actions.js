@@ -1,15 +1,25 @@
 import * as api from 'api';
+import { currentUser } from 'constants';
 import actionTypes from './actionTypes';
 
-const currentUser = {
-  id: '99',
-};
+const getUsersLoad = () => ({ type: actionTypes.GET_USERS_LOAD });
 
-const setMessage = message => ({ payload: { message }, type: actionTypes.SEND_MESSAGE });
-const setUsers = users => ({ payload: { users }, type: actionTypes.SET_USERS });
-const setMessages = messages => ({ payload: { messages }, type: actionTypes.SET_MESSAGES });
+const getUsersSuccess = users => ({ payload: { users }, type: actionTypes.GET_USERS_SUCCESS });
+
+const getMessagesLoad = () => ({ type: actionTypes.GET_MESSAGES_LOAD });
+
+const getMessagesSuccess = messages => ({
+  payload: { messages },
+  type: actionTypes.GET_MESSAGES_SUCCESS,
+});
+
+const setMessage = (message, receiverId) => ({
+  payload: { message, receiverId },
+  type: actionTypes.SEND_MESSAGE,
+});
 
 export const getUsers = () => async dispatch => {
+  dispatch(getUsersLoad());
   try {
     const users = await api.getUsers();
     const usersToSet = users.reduce(
@@ -19,7 +29,7 @@ export const getUsers = () => async dispatch => {
       }),
       {}
     );
-    dispatch(setUsers(usersToSet));
+    dispatch(getUsersSuccess(usersToSet));
   } catch (e) {
     // Error handling needed
     console.log('error ', e);
@@ -27,10 +37,28 @@ export const getUsers = () => async dispatch => {
 };
 
 export const getAllMessages = () => async dispatch => {
+  dispatch(getMessagesLoad());
   try {
     const messages = await api.getMessages(currentUser.id);
-    console.log('messages ', messages);
-    dispatch(setMessages(messages));
+    console.log('messages  ', messages);
+    const messagesToSet = messages.reduce((acc, message) => {
+      const { receiverId, authorId, text, createdAt, id } = message;
+      const userId = authorId === currentUser.id ? receiverId : authorId;
+      return {
+        ...acc,
+        [userId]: [
+          ...(acc[userId] || []),
+          {
+            id,
+            text,
+            createdAt,
+            receiverId,
+            authorId,
+          },
+        ],
+      };
+    }, {});
+    dispatch(getMessagesSuccess(messagesToSet));
   } catch (e) {
     // Error handling needed
     console.log('error ', e);
@@ -44,13 +72,17 @@ export const sendMessage = (message, receiverId) => async dispatch => {
     ...messageRest
   } = message;
 
+  console.log('message ', message);
+  console.log('messageRest ', { ...messageRest });
+
   try {
     const messageResponse = await api.sendMessage({
       authorId,
       receiverId,
       ...messageRest,
     });
-    dispatch(setMessage(messageResponse));
+    console.log('messageResponse ', messageResponse);
+    dispatch(setMessage(messageResponse, receiverId));
   } catch (e) {
     // Error handling needed
     console.log('error sendMessage', e);

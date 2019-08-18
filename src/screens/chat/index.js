@@ -4,17 +4,10 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { actions, selectors } from 'modules/Chat';
+import { currentUser } from 'constants';
 
 const { sendMessage } = actions;
 const { selectMessages } = selectors;
-
-// test DATA. To be removed
-const currentUser = {
-  _id: '99',
-  name: 'Ana Houwa',
-  avatar:
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuGqKkt_LRV7co8maLFEvlOH-WzjZriCr6IVqnB4LFTtzvS9Om',
-};
 
 class ChatScreen extends React.Component {
   componentDidMount() {}
@@ -22,8 +15,6 @@ class ChatScreen extends React.Component {
   render() {
     const { messages, navigation, onSendMessage } = this.props;
     const receiverId = navigation.getParam('user').id;
-
-    console.log('messages ', messages);
 
     return (
       <View flex>
@@ -33,7 +24,7 @@ class ChatScreen extends React.Component {
         <GiftedChat
           messages={messages}
           onSend={newMessages => onSendMessage(newMessages[0], receiverId)}
-          user={{ _id: '99' }}
+          user={{ _id: currentUser.id }}
         />
       </View>
     );

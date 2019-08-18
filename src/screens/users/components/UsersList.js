@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, FlatList, StyleSheet, Image, TouchableHighlight } from 'react-native';
-import { currentUser } from 'constants';
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class ConvsList extends React.Component {
+class UsersList extends React.Component {
   renderItem = user => {
     const { navigation } = this.props;
     const { item } = user;
@@ -41,11 +40,6 @@ class ConvsList extends React.Component {
           <Image style={styles.avatar} source={{ uri: item.avatar }} resizeMode="cover" />
           <View flexDirection="column">
             <Text style={styles.text}>{item.name}</Text>
-            <Text style={styles.lastMessageText}>
-              {currentUser.id === item.lastMessage.authorId
-                ? `You: ${item.lastMessage.text}`
-                : item.lastMessage.text}
-            </Text>
           </View>
         </View>
       </TouchableHighlight>
@@ -60,9 +54,9 @@ class ConvsList extends React.Component {
   }
 }
 
-ConvsList.propTypes = {
+UsersList.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   navigation: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default ConvsList;
+export default UsersList;

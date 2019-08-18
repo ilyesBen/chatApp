@@ -4,29 +4,24 @@ import ChatScreen from 'screens/chat';
 import UsersListScreen from 'screens/users';
 import ConvsListScreen from 'screens/conversations';
 
-const ChatStackNavigator = createStackNavigator(
-  {
-    ConvsList: { screen: ConvsListScreen },
-    Chat: ChatScreen,
-  },
-  {
-    headerMode: 'none',
-    navigationOptions: ({ navigation }) => navigation.state.index > 0 && { tabBarVisible: false },
-  }
-);
-
 const HomeTabNavigator = createBottomTabNavigator({
-  Chat: ChatStackNavigator,
+  ConvsList: ConvsListScreen,
   Users: UsersListScreen,
+});
+
+const HomeStackNavigator = createStackNavigator({
+  ChatUserTab: HomeTabNavigator,
+  Chat: ChatScreen,
 });
 
 const AppNavigator = createStackNavigator(
   {
     Login: LoginScreen,
-    Home: HomeTabNavigator,
+    Home: HomeStackNavigator,
   },
   {
     initialRouteName: 'Home',
+    headerMode: 'none',
   }
 );
 
