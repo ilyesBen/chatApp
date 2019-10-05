@@ -23,7 +23,7 @@ const chatReducer = (state = initialState, action = {}) => {
           list: {
             ...state.messages.list,
             [action.payload.receiverId]: [
-              ...state.messages.list[action.payload.receiverId],
+              ...(state.messages.list[action.payload.receiverId] || []),
               action.payload.message,
             ],
           },

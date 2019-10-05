@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
 import { selectors } from 'modules/Chat';
+import { Header } from 'components';
 import { UsersList } from './components';
 
 const { selectUsers, selectUsersLoading } = selectors;
@@ -15,6 +16,7 @@ class UsersScreen extends React.Component {
 
     return (
       <View flex>
+        <Header title="Users" />
         <UsersList users={users} navigation={navigation} />
       </View>
     );

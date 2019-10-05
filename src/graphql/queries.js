@@ -24,8 +24,8 @@ export const listUsers = `query ListUsers(
   }
 }
 `;
-export const getMessage = `query GetMessage($id: ID!) {
-  getMessage(id: $id) {
+export const getMessage = `query GetMessage($id: ID!, $createdAt: AWSDateTime!) {
+  getMessage(id: $id, createdAt: $createdAt) {
     id
     text
     authorId
@@ -35,11 +35,21 @@ export const getMessage = `query GetMessage($id: ID!) {
 }
 `;
 export const listMessages = `query ListMessages(
+  $id: ID
+  $createdAt: ModelStringKeyConditionInput
   $filter: ModelMessageFilterInput
   $limit: Int
   $nextToken: String
+  $sortDirection: ModelSortDirection
 ) {
-  listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listMessages(
+    id: $id
+    createdAt: $createdAt
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
     items {
       id
       text

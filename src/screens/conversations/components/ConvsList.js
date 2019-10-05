@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, FlatList, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import { currentUser } from 'constants';
+import theme from '../../../config/theme';
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -11,20 +12,20 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   avatar: {
-    height: 30,
-    width: 30,
-    borderRadius: 15,
+    height: 40,
+    width: 40,
+    borderRadius: 20,
     marginRight: 10,
   },
   text: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '500',
-    color: 'black',
+    color: theme.onSurface,
   },
   lastMessageText: {
-    fontSize: 11,
-    fontWeight: '200',
-    color: 'grey',
+    fontSize: 12,
+    fontWeight: '300',
+    color: theme.onSurfaceVariant,
   },
 });
 
@@ -35,7 +36,7 @@ class ConvsList extends React.Component {
     return (
       <TouchableHighlight
         onPress={() => navigation.navigate('Chat', { user: item })}
-        underlayColor="#D3D3D3"
+        underlayColor={theme.disabled}
       >
         <View style={styles.itemContainer}>
           <Image style={styles.avatar} source={{ uri: item.avatar }} resizeMode="cover" />

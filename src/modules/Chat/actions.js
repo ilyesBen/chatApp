@@ -73,10 +73,11 @@ export const sendMessage = (message, receiverId) => async dispatch => {
   } = message;
 
   console.log('message ', message);
-  console.log('messageRest ', { ...messageRest });
+  console.log('messageRest ', { authorId, receiverId, ...messageRest });
 
   try {
     const messageResponse = await api.sendMessage({
+      id: _id,
       authorId,
       receiverId,
       ...messageRest,

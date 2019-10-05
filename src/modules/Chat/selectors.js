@@ -30,7 +30,7 @@ export const selectMessages = createSelector(
       ...message,
       _id: message.id,
       user: {
-        ...users[message.authorId],
+        ...users.list[message.authorId],
         _id: message.authorId,
       },
     }));

@@ -21,7 +21,7 @@ class ConvsListScreen extends React.Component {
 
     return (
       <View flex>
-        <Header />
+        <Header title="Chats" />
         <ConvsList users={usersWithLastMessage} navigation={navigation} />
       </View>
     );

@@ -4,7 +4,7 @@ type User @model {
   avatar: String
 }
 
-type Message @model {
+type Message @model @key(fields: ["id", "createdAt"]) {
   id: ID!
   text: String!
   authorId: ID!

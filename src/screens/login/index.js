@@ -3,7 +3,7 @@ import { View, Button } from 'react-native';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { createUser, createMessage } from 'graphqlApi/mutations';
 import { listUsers } from 'graphqlApi/queries';
-import * as subscriptions from 'graphqlApi/subscriptions';
+// import * as subscriptions from 'graphqlApi/subscriptions';
 
 // test mutation
 const createNewUser = async () => {
@@ -19,9 +19,9 @@ const createNewUser = async () => {
 
 const createNewMessage = async () => {
   const message = {
-    id: '8309128302103',
-    text: 'Wech ana houwa authordId',
-    authorId: '4',
+    id: '830912830210332323',
+    text: 'ca va chwiya ?',
+    authorId: '10',
     receiverId: '99',
     createdAt: new Date(),
   };
@@ -38,13 +38,13 @@ const getUsers = async () => {
 
 const LoginScreen = () => {
   // test subscription
-  const subscription = API.graphql(
-    graphqlOperation(subscriptions.onCreateMessageByAuthorId, { authorId: '7' })
-  ).subscribe({
-    next: eventData => console.log('event from subscription ', eventData),
-  });
+  // const subscription = API.graphql(
+  //   graphqlOperation(subscriptions.onCreateMessageByAuthorId, { authorId: '7' })
+  // ).subscribe({
+  //   next: eventData => console.log('event from subscription ', eventData),
+  // });
 
-  console.log('subscription ', subscription);
+  // console.log('subscription ', subscription);
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button onPress={createNewUser} title="Test graphQl Create User" />

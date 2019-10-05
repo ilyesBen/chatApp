@@ -1,23 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import theme from 'config/theme';
 import { Container } from 'components';
 
-const Back = ({ size, color }) => (
+const Users = ({ size, color }) => (
   <Container size={size}>
-    <Icon size={size - 5} color={color} name="ios-arrow-back" />
+    <Icon size={size - 5} color={color} name="users" />
   </Container>
 );
 
-Back.propTypes = {
+Users.propTypes = {
   size: PropTypes.number,
   color: PropTypes.string,
 };
 
-Back.defaultProps = {
+Users.defaultProps = {
   size: 30,
   color: theme.onPrimary,
 };
 
-export default Back;
+export default Users;

@@ -8,35 +8,53 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 100,
+    height: 40,
+    padding: 5,
     backgroundColor: theme.primary,
-    padding: 10,
     shadowColor: theme.onPrimaryVariant,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.4,
     elevation: 3,
     shadowRadius: 5,
   },
-  backButton: {},
+  iconContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 40,
+    height: 40,
+  },
+  titleContainer: {
+    alignItems: 'center',
+  },
   title: {
-    color: theme.onPrimaryVariant,
+    color: theme.onPrimary,
+    fontSize: 18,
+    fontWeight: '500',
+    textAlign: 'center',
   },
 });
 
 const Header = ({ onBackPress, title }) => (
-  <View style={styles.container}>
-    {onBackPress && (
-      <TouchableOpacity style={styles.backButton} onPress={onBackPress}>
-        <Icons.Back />
-      </TouchableOpacity>
-    )}
-    <Text style={styles.title}>{title}</Text>
+  <View justifyContent={onBackPress ? 'space-between' : 'center'} style={styles.container}>
+    <TouchableOpacity onPress={onBackPress}>
+      {onBackPress && (
+        <View style={styles.iconContainer}>
+          <Icons.Back />
+        </View>
+      )}
+    </TouchableOpacity>
+
+    <View style={styles.titleContainer}>
+      <Text style={styles.title}>{title}</Text>
+    </View>
+
+    {onBackPress && <View visibility="hidden" style={styles.iconContainer} />}
   </View>
 );
 
 Header.propTypes = {
   title: PropTypes.string,
-  onBackPress: PropTypes.string,
+  onBackPress: PropTypes.func,
 };
 
 Header.defaultProps = {
