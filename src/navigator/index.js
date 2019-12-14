@@ -6,6 +6,7 @@ import {
   createAppContainer,
 } from 'react-navigation';
 import LoginScreen from 'screens/login';
+import SignUpScreen from 'screens/signUp';
 import ChatScreen from 'screens/chat';
 import UsersListScreen from 'screens/users';
 import ConvsListScreen from 'screens/conversations';
@@ -53,6 +54,7 @@ const HomeStackNavigator = createStackNavigator(
 const Screens = createStackNavigator(
   {
     Login: LoginScreen,
+    SignUp: SignUpScreen,
     Home: HomeStackNavigator,
   },
   {

@@ -1,5 +1,4 @@
 import API, { graphqlOperation } from '@aws-amplify/api';
-
 import * as queries from 'graphqlApi/queries';
 import * as mutations from 'graphqlApi/mutations';
 // import * as subscriptions from 'graphqlApi/subscriptions';
@@ -12,7 +11,9 @@ export const getUsers = async () => {
 export const getMessages = async currentUserId => {
   const response = await API.graphql(
     graphqlOperation(queries.listMessages, {
-      filter: { or: [{ authorId: { eq: currentUserId } }, { receiverId: { eq: currentUserId } }] },
+      filter: {
+        or: [{ authorId: { eq: currentUserId } }, { receiverId: { eq: currentUserId } }],
+      },
       limit: 100,
     })
   );
@@ -23,3 +24,8 @@ export const sendMessage = async message => {
   const response = await API.graphql(graphqlOperation(mutations.createMessage, { input: message }));
   return response.data.createMessage;
 };
+
+// test subscription
+// export const subscribeToCreateMessage = API.graphql(
+//   graphqlOperation(subscriptions.onCreateMessageByAuthorId, { authorId: '7' })
+// );

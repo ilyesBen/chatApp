@@ -16,5 +16,12 @@
 				}
 			}
 		}
+	},
+	"auth": {
+		"chatapp7dcc4bff": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
 	}
 }

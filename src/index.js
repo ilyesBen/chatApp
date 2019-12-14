@@ -3,11 +3,15 @@ import { Provider } from 'react-redux';
 import store from 'store';
 import API from '@aws-amplify/api';
 import PubSub from '@aws-amplify/pubsub';
+import Auth from '@aws-amplify/auth';
 import AppNavigator from './navigator';
 import config from '../aws-exports';
 
-API.configure(config); // Configure Amplify
+// **** Amplify Config ***** //
+API.configure(config);
 PubSub.configure(config);
+Auth.configure(config);
+// ************************ //
 
 const App = () => {
   return (

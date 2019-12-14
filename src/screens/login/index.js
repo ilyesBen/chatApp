@@ -1,57 +1,79 @@
-import React from 'react';
-import { View, Button } from 'react-native';
-import API, { graphqlOperation } from '@aws-amplify/api';
-import { createUser, createMessage } from 'graphqlApi/mutations';
-import { listUsers } from 'graphqlApi/queries';
-// import * as subscriptions from 'graphqlApi/subscriptions';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Container, Header, Item, Input, Title, Body, Button, Text } from 'native-base';
+import { StyleSheet, KeyboardAvoidingView } from 'react-native';
+import theme from 'config/theme';
+import Auth from '@aws-amplify/auth';
 
-// test mutation
-const createNewUser = async () => {
-  const user = {
-    name: 'React Native',
-    id: 10909,
-    avatar:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuGqKkt_LRV7co8maLFEvlOH-WzjZriCr6IVqnB4LFTtzvS9Om',
-  };
+const styles = StyleSheet.create({
+  formContainer: {
+    justifyContent: 'center',
+    padding: 10,
+  },
+  header: {
+    backgroundColor: theme.primary,
+  },
+  emailInput: {
+    marginBottom: 10,
+  },
+  passwordInput: {
+    marginBottom: 10,
+  },
+  button: {
+    marginBottom: 10,
+  },
+});
 
-  await API.graphql(graphqlOperation(createUser, { input: user }));
+const login = (username, password) => {
+  Auth.signIn({
+    username, // Required, the username
+    password, // Optional, the password
+  })
+    .then(user => console.log('user ', user))
+    .catch(err => console.log('error', err));
 };
 
-const createNewMessage = async () => {
-  const message = {
-    id: '830912830210332323',
-    text: 'ca va chwiya ?',
-    authorId: '10',
-    receiverId: '99',
-    createdAt: new Date(),
-  };
-
-  const responseMessage = await API.graphql(graphqlOperation(createMessage, { input: message }));
-  console.log('Message succesfuly created ', responseMessage);
-};
-
-// test queries
-const getUsers = async () => {
-  const users = await API.graphql(graphqlOperation(listUsers));
-  console.log('users ', users);
-};
-
-const LoginScreen = () => {
-  // test subscription
-  // const subscription = API.graphql(
-  //   graphqlOperation(subscriptions.onCreateMessageByAuthorId, { authorId: '7' })
-  // ).subscribe({
-  //   next: eventData => console.log('event from subscription ', eventData),
-  // });
-
+const LoginScreen = ({ navigation }) => {
   // console.log('subscription ', subscription);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={createNewUser} title="Test graphQl Create User" />
-      <Button onPress={getUsers} title="Test graphQl list Users" />
-      <Button onPress={createNewMessage} title="Test graphQl create message" />
-    </View>
+    <Container>
+      <Header style={styles.header}>
+        <Body>
+          <Title>Chat App</Title>
+        </Body>
+      </Header>
+      <KeyboardAvoidingView flex={1} keyboardVerticalOffset={20} behavior="padding">
+        <Container style={styles.formContainer}>
+          <Item style={styles.emailInput}>
+            <Input placeholder="Username" onChangeText={text => setUsername(text)} />
+          </Item>
+          <Item style={styles.passwordInput}>
+            <Input
+              placeholder="Password"
+              secureTextEntry
+              onChangeText={text => setPassword(text)}
+            />
+          </Item>
+          <Button style={styles.button} onPress={() => login(username, password)}>
+            <Body>
+              <Text>Log in</Text>
+            </Body>
+          </Button>
+          <Button transparent onPress={() => navigation.navigate('SignUp')}>
+            <Body>
+              <Text>Sign Up</Text>
+            </Body>
+          </Button>
+        </Container>
+      </KeyboardAvoidingView>
+    </Container>
   );
+};
+
+LoginScreen.propTypes = {
+  navigation: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default LoginScreen;

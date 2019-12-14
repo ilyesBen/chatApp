@@ -9,6 +9,11 @@
             "UnauthRoleName": "chatapp-chatapp-20190824185041-unauthRole",
             "StackName": "chatapp-chatapp-20190824185041",
             "StackId": "arn:aws:cloudformation:eu-west-2:763781207264:stack/chatapp-chatapp-20190824185041/b0c08880-c697-11e9-8626-06bdc1af1230"
+        },
+        "categories": {
+            "auth": {
+                "chatapp7dcc4bff": {}
+            }
         }
     }
 }
